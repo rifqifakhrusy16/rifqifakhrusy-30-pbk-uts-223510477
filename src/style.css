@@ -1,80 +1,136 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(236, 234, 234, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+header {
+  background-color: #008522;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
 }
 
+nav li {
+  cursor: pointer;
+  padding: 10px;
+  color: white;
+}
+
+nav li.active {
+  background-color: #005713;
+  border-radius: 5px;
+}
+
+.todo-list {
+  border: 2px solid aqua;
+  background-color: rgba(225, 225, 225, 0.4);
+  box-shadow: 10px 10px 20px rgb(5, 148, 52);
+  margin: auto;
+  padding: 25px;
+  border-radius: 0 0 10px 10px;
+  border-color: rgb(8, 129, 44);
+  color: rgb(255, 255, 255);
+}
+
+ul {
+  list-style-type: none;
+  padding: 10px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkbox-left {
+  margin-right: 10px;
+}
+
+.task-title {
+  flex-grow: 1; /* Mengisi ruang yang tersisa */
+}
+
+.posts {
+  border: 2px solid aqua;
+  background-color: rgba(225, 225, 225, 0.4);
+  box-shadow: 10px 10px 20px rgb(5, 148, 52);
+  margin: auto;
+  padding: 25px;
+  border-radius: 0 0 10px 10px;
+  border-color: rgb(8, 129, 44);
+  color: rgb(255, 255, 255);
+}
+
+.posts ul {
+  list-style-type: none;
+  padding: 10px;
+}
+
+.posts li {
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.posts li:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.post-details {
+  text-align: left;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+.back-button {
+  background-color: #005713;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
   min-width: 320px;
   min-height: 100vh;
   background-image: url('./assets/1669551.jpg');
+  background-size: cover; /* Ensure the background covers the entire area */
+  background-position: center; /* Center the background image */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #2b2828;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.card {
-  padding: 2em;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.app {
+  width: 90%; /* Adjust width to be responsive */
+  max-width: 500px; /* Set a max-width to prevent it from growing too large */
   text-align: center;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #f0eaea;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a slight background to app for better readability */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add shadow for better separation from background */
 }
