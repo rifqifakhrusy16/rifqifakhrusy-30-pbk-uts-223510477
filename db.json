@@ -1,0 +1,44 @@
+{
+    "albums": [
+      { "id": 1, "title": "Summer Vacation" },
+      { "id": 2, "title": "Winter Wonderland" },
+      { "id": 3, "title": "Spring Blossoms" },
+      { "id": 4, "title": "Autumn Leaves" },
+      { "id": 5, "title": "City Lights" }
+    ],
+    "images": [
+      { "id": 1, "albumId": 1, "title": "Beach", "url": "https://via.placeholder.com/600/92c952" },
+      { "id": 2, "albumId": 1, "title": "Sunset", "url": "https://via.placeholder.com/600/771796" },
+      { "id": 3, "albumId": 1, "title": "Mountain", "url": "https://via.placeholder.com/600/24f355" },
+      { "id": 4, "albumId": 2, "title": "Snowman", "url": "https://via.placeholder.com/600/d32776" },
+      { "id": 5, "albumId": 2, "title": "Skiing", "url": "https://via.placeholder.com/600/f66b97" },
+      { "id": 6, "albumId": 2, "title": "Snowy Trees", "url": "https://via.placeholder.com/600/56a8c2" },
+      { "id": 7, "albumId": 3, "title": "Cherry Blossoms", "url": "https://via.placeholder.com/600/b0f7cc" },
+      { "id": 8, "albumId": 3, "title": "Garden", "url": "https://via.placeholder.com/600/54176f" },
+      { "id": 9, "albumId": 3, "title": "Butterfly", "url": "https://via.placeholder.com/600/51aa97" },
+      { "id": 10, "albumId": 4, "title": "Falling Leaves", "url": "https://via.placeholder.com/600/810b14" },
+      { "id": 11, "albumId": 4, "title": "Pumpkins", "url": "https://via.placeholder.com/600/1ee8a4" },
+      { "id": 12, "albumId": 4, "title": "Harvest", "url": "https://via.placeholder.com/600/66b7d2" },
+      { "id": 13, "albumId": 5, "title": "Skyscraper", "url": "https://via.placeholder.com/600/197d29" },
+      { "id": 14, "albumId": 5, "title": "City Park", "url": "https://via.placeholder.com/600/61a65" },
+      { "id": 15, "albumId": 5, "title": "Street Lights", "url": "https://via.placeholder.com/600/f9cee5" },
+      { "id": 16, "albumId": 1, "title": "Surfing", "url": "https://via.placeholder.com/600/fdf73e" },
+      { "id": 17, "albumId": 2, "title": "Ice Skating", "url": "https://via.placeholder.com/600/9c184f" },
+      { "id": 18, "albumId": 3, "title": "Flowers", "url": "https://via.placeholder.com/600/8e973b" },
+      { "id": 19, "albumId": 4, "title": "Autumn Forest", "url": "https://via.placeholder.com/600/ef5aad" },
+      { "id": 20, "albumId": 5, "title": "Night View", "url": "https://via.placeholder.com/600/1a34b2" }
+    ],
+    "posts": [
+      { "id": 1, "title": "My First Post", "body": "This is the body of my first post" },
+      { "id": 2, "title": "Another Post", "body": "This is the body of another post" },
+      { "id": 3, "title": "Yet Another Post", "body": "This is the body of yet another post" },
+      { "id": 4, "title": "Post Four", "body": "This is the body of post four" },
+      { "id": 5, "title": "Post Five", "body": "This is the body of post five" },
+      { "id": 6, "title": "Post Six", "body": "This is the body of post six" },
+      { "id": 7, "title": "Post Seven", "body": "This is the body of post seven" },
+      { "id": 8, "title": "Post Eight", "body": "This is the body of post eight" },
+      { "id": 9, "title": "Post Nine", "body": "This is the body of post nine" },
+      { "id": 10, "title": "Post Ten", "body": "This is the body of post ten" }
+    ]
+  }
+  
