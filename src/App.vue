@@ -5,109 +5,99 @@
         <ul>
           <li @click="view = 'todos'" :class="{ active: view === 'todos' }">Todos</li>
           <li @click="view = 'posts'" :class="{ active: view === 'posts' }">Posts</li>
+          <li @click="view = 'albums'" :class="{ active: view === 'albums' }">Albums</li>
         </ul>
       </nav>
     </header>
-    <Todos v-if="view === 'todos'" :tasks="tasks" :newTask="newTask" :showOnlyIncomplete="showOnlyIncomplete" @add-task="addTask" @remove-task="removeTask" @update-new-task="updateNewTask" @toggle-incomplete="toggleIncomplete" />
+    <Todos v-if="view === 'todos'" :tasks="tasks" :newTask="newTask" :showOnlyIncomplete="showOnlyIncomplete" @add-task="addTask" @remove-task="removeTask" @update-new-task="updateNewTask" @toggle-incomplete="toggleIncomplete" @edit-task="editTask" />
     <Posts v-if="view === 'posts'" :users="users" :posts="posts" :selectedUserId="selectedUserId" :selectedPost="selectedPost" @fetch-posts-by-user="fetchPostsByUser" @select-post="selectPost" @deselect-post="deselectPost" />
+    <Albums v-if="view === 'albums'" />
   </div>
 </template>
 
 <script>
-import Todos from './components/Todos.vue';
-import Posts from './components/Posts.vue';
+import { ref } from 'vue'
+import Todos from './components/Todos.vue'
+import Posts from './components/Posts.vue'
+import Albums from './components/Albums.vue'
 
 export default {
   components: {
     Todos,
-    Posts
+    Posts,
+    Albums,
   },
-  data() {
+  setup() {
+    const view = ref('todos')  // default view
+    
+    const tasks = ref([])
+    const newTask = ref('')
+    const showOnlyIncomplete = ref(false)
+    const users = ref([])
+    const posts = ref([])
+    const selectedUserId = ref(null)
+    const selectedPost = ref(null)
+
+    const addTask = (task) => {
+      tasks.value.push(task)
+    }
+
+    const removeTask = (index) => {
+      tasks.value.splice(index, 1)
+    }
+
+    const updateNewTask = (task) => {
+      newTask.value = task
+    }
+
+    const toggleIncomplete = () => {
+      showOnlyIncomplete.value = !showOnlyIncomplete.value
+    }
+
+    const fetchPostsByUser = async (userId) => {
+      try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+        posts.value = await response.json()
+      } catch (error) {
+        console.error('Error fetching posts:', error)
+      }
+    }
+
+    const selectPost = (post) => {
+      selectedPost.value = post
+    }
+
+    const deselectPost = () => {
+      selectedPost.value = null
+    }
+
+    const editTask = (task) => {
+      const index = tasks.value.findIndex(t => t === task)
+      if (index !== -1) {
+        tasks.value.splice(index, 1, task)
+      }
+    }
+
     return {
-      newTask: '',
-      tasks: [],
-      showOnlyIncomplete: false,
-      view: 'todos', // Initial view set to 'todos'
-      posts: [],
-      selectedPost: null, // To store the selected post
-      users: [],
-      selectedUserId: null // To store the selected user's ID
-    };
-  },
-  methods: {
-    addTask() {
-      if (this.newTask.trim() !== '') {
-        this.tasks.push({ title: this.newTask.trim(), completed: false });
-        this.newTask = '';
-      }
-    },
-    removeTask(index) {
-      this.tasks.splice(index, 1);
-    },
-    updateNewTask(newTask) {
-      this.newTask = newTask;
-    },
-    toggleIncomplete(showOnlyIncomplete) {
-      this.showOnlyIncomplete = showOnlyIncomplete;
-    },
-    async fetchPosts() {
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const data = await response.json();
-        this.posts = data;
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    },
-    async fetchUsers() {
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users');
-        const data = await response.json();
-        this.users = data;
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    },
-    async fetchPostsByUser(userId) {
-      if (userId) {
-        try {
-          const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
-          const data = await response.json();
-          this.posts = data;
-          this.selectedPost = null;
-        } catch (error) {
-          console.error('Error fetching posts:', error);
-        }
-      } else {
-        this.posts = [];
-      }
-    },
-    selectPost(post) {
-      this.selectedPost = post;
-    },
-    deselectPost() {
-      this.selectedPost = null;
+      view,
+      tasks,
+      newTask,
+      showOnlyIncomplete,
+      users,
+      posts,
+      selectedUserId,
+      selectedPost,
+      addTask,
+      removeTask,
+      updateNewTask,
+      toggleIncomplete,
+      fetchPostsByUser,
+      selectPost,
+      deselectPost,
+      editTask
     }
   },
-  watch: {
-    view(newView) {
-      if (newView === 'posts') {
-        if (this.users.length === 0) {
-          this.fetchUsers();
-        }
-      }
-    }
-  },
-  computed: {
-    filteredTasks() {
-      if (this.showOnlyIncomplete) {
-        return this.tasks.filter(task => !task.completed);
-      } else {
-        return this.tasks;
-      }
-    }
-  }
-};
+}
 </script>
 
 <style scoped>
