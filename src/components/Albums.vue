@@ -6,31 +6,40 @@
         <h2>{{ album.title }}</h2>
       </li>
     </ul>
-    <Photos v-if="selectedAlbum" :album="selectedAlbum" @deselect-album="deselectAlbum" />
   </div>
 </template>
 
 <script>
-import { defineComponent, onMounted } from 'vue';
-import { useAlbumStore } from '../store/Albums';
-import Photos from './Photos.vue';
+import { defineComponent, ref } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
-  components: {
-    Photos
-  },
   setup() {
-    const store = useAlbumStore();
+    const albums = ref([]);
+    const router = useRouter();
 
-    onMounted(() => {
-      store.fetchAlbums();
-    });
+    // Fetch albums from JSONPlaceholder API
+    const fetchAlbums = async () => {
+      try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/albums');
+        albums.value = response.data;
+      } catch (error) {
+        console.error('Error fetching albums:', error);
+      }
+    };
+
+    // Function to navigate to album detail page
+    const selectAlbum = (album) => {
+      router.push(`/albums/${album.id}`);
+    };
+
+    // Fetch albums on component mounted
+    fetchAlbums();
 
     return {
-      albums: store.albums,
-      selectedAlbum: store.selectedAlbum,
-      selectAlbum: store.selectAlbum,
-      deselectAlbum: store.deselectAlbum,
+      albums,
+      selectAlbum,
     };
   },
 });
@@ -49,7 +58,7 @@ export default defineComponent({
 .album-item {
   cursor: pointer;
   padding: 10px;
-  margin: 10px 0;
+  margin-bottom: 5px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -63,5 +72,6 @@ export default defineComponent({
 .album-item h2 {
   margin: 0;
   font-size: 1.2em;
+  text-align: center;
 }
 </style>

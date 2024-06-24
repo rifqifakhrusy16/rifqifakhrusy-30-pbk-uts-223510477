@@ -1,10 +1,12 @@
+// src/store/Albums.js
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
-export const useAlbumStore = defineStore('albumStore', {
+export const useAlbumStore = defineStore('album', {
   state: () => ({
     albums: [],
-    selectedAlbum: null,
+    photos: [],
+    selectedAlbumId: null,
   }),
   actions: {
     async fetchAlbums() {
@@ -12,14 +14,17 @@ export const useAlbumStore = defineStore('albumStore', {
         const response = await axios.get('https://jsonplaceholder.typicode.com/albums');
         this.albums = response.data;
       } catch (error) {
-        console.error('Failed to fetch albums:', error);
+        console.error('Error fetching albums:', error);
       }
     },
-    selectAlbum(album) {
-      this.selectedAlbum = album;
+    async fetchPhotos(albumId) {
+      try {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/albums/${albumId}/photos`);
+        this.photos = response.data;
+        this.selectedAlbumId = albumId;
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      }
     },
-    deselectAlbum() {
-      this.selectedAlbum = null;
-    }
-  }
+  },
 });
